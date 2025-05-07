@@ -2,3 +2,6 @@
 /.scala-build
 /.bsp
 /.metals
+/project/target/config-classes
+/project/target/config-classes
+*.cache
