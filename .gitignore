@@ -2,5 +2,3 @@
 /.scala-build
 /.bsp
 /.metals
-/project
-/target
