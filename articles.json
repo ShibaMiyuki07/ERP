@@ -1,10 +1,10 @@
 [
     {
-      "title": "First",
-      "content": "Data"
+      "articleId": "First",
+      "articleName": "Data"
     },
     {
-      "title": "Second",
-      "content": "Autre data"
+      "articleId": "Second",
+      "articleName": "Autre data"
     }
   ]

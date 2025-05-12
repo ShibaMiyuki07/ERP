@@ -3,23 +3,26 @@ import com.example.models.{Article}
 import upickle.default._
 object JsonService {
   def readJson(path : String) : List[Article] = {
-    val jsonFile = os.read(os.pwd / "articles.json")
-    val articles = read[List[Article]](jsonFile)
+    var articles : List[Article] = List()
+    try{
+      val jsonFile : String = getJsonFile("articles.json")
+      articles= read[List[Article]](jsonFile)
+    }
+    catch {
+      case e : Exception => throw e
+    }
     articles
   }
 
-  given Reader[Article] = reader[ujson.Value].map { json =>
-    val obj = json.obj
-    new Article(
-        obj("title").str,
-        obj("content").str
-    )
+  def getJsonFile(path : String) : String =
+  {
+    var jsonFile : String = ""
+    try{
+      jsonFile = os.read(os.pwd / path)
     }
-
-    given Writer[Article] = writer[ujson.Value].comap { a =>
-    ujson.Obj(
-        "title" -> a.articleId,
-        "content" -> a.articleName
-    )
+    catch {
+      case e : Exception => throw e
     }
+    jsonFile
+  }
 }

@@ -7,9 +7,16 @@ import com.example.controllers.{ArticleController}
 import com.comcast.ip4s.ipv4
 
 import com.comcast.ip4s.port 
+import org.http4s.server.middleware.CORS
+import org.http4s.{Method} 
+
 object Main extends IOApp:
 
-  val httpApp = ( 
+  val corsPolicy = CORS.policy
+    .withAllowOriginAll
+    .withAllowCredentials(false)
+    .withAllowMethodsIn(Set(Method.GET, Method.POST, Method.PUT, Method.DELETE))
+  val httpApp = corsPolicy( 
         ArticleController.routes
       ).orNotFound
       

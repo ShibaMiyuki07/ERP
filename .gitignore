@@ -5,3 +5,8 @@
 /project/target/config-classes
 /project/target/config-classes
 *.cache
+/.bloop
+/project/.bloop
+/project/project/.bloop
+*.class
+/project/project/project/target
