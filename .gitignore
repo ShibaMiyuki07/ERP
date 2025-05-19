@@ -3,7 +3,6 @@
 /.bsp
 /.metals
 /project/target/config-classes
-/project/target/config-classes
 *.cache
 *.jar
 /target
@@ -12,3 +11,4 @@
 /project
 /target/streams/compile
 *.class
+*.tasty
