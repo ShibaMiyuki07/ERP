@@ -9,3 +9,6 @@
 /target
 /target/scala-3.3.3
 /target/streams
+/project
+/target/streams/compile
+*.class

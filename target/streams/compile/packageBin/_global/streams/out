@@ -1,5 +1,7 @@
 [0m[[0m[0mdebug[0m] [0m[0mPackaging F:\EDAI\ERP\target\scala-3.3.3\erp_3-0.0.1-SNAPSHOT.jar ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	application.conf[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  F:\EDAI\ERP\target\scala-3.3.3\classes\application.conf[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ArticleService$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  F:\EDAI\ERP\target\scala-3.3.3\classes\ArticleService$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	ArticleService.class[0m
