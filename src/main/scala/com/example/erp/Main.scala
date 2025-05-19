@@ -3,10 +3,15 @@ package com.example.erp
 import cats.effect.*
 import org.http4s.ember.server.*
 import org.http4s.implicits.*
-import com.example.controllers.{ArticleController}
+import com.example.controllers.{ArticleController, UserController}
 import com.comcast.ip4s.ipv4
+import com.example.services.UserService
+import slick.jdbc.JdbcBackend.Database
 
-import slick.jdbc.PostgresProfile.api.*
+import java.util.concurrent.Executors
+import scala.concurrent.ExecutionContext
+
+//import slick.jdbc.PostgresProfile.api.*
 
 import com.comcast.ip4s.port 
 object Main extends IOApp:
@@ -16,20 +21,22 @@ object Main extends IOApp:
       ).orNotFound
       
   def run(args: List[String]): IO[ExitCode] =
-    {
-      val db = Database.forConfig("mydb")
-      val query = sql"SELECT 1".as[Int]
-
-      val action = IO.fromFuture(IO(db.run(query))).flatMap { result =>
-        IO(println("DB result: " + result))
+  {
+    val dbEc = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(4))
+    Resource.make(IO(Database.forConfig("mydb")))(db => IO(db.close))
+      .map { db =>
+        implicit val ec: ExecutionContext = dbEc // Make implicit for services
+        new AllRoutes(
+          new UserController(new UserService(db)),
+        )
       }
-      action *>
+      .use { allRoutes =>
         EmberServerBuilder
-              .default[IO]
-              .withHost(ipv4"0.0.0.0")
-              .withPort(port"8080")
-              .withHttpApp(httpApp)
-              .build
-              .use(_ => IO.never)
-              .as(ExitCode.Success)
+          .default[IO]
+          .withHost(ipv4"0.0.0.0")
+          .withPort(port"8080")
+          .withHttpApp(allRoutes.routes.orNotFound)
+          .build
+          .use(_ => IO.never)
+      }
     }
