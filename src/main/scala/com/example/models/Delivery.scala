@@ -1,6 +1,6 @@
 package com.example.models
 
-import com.example.services.DateTimeMapping
+import com.example.services.DateTypeMapping
 
 import java.time.LocalDateTime
 import slick.jdbc.PostgresProfile.api.*
@@ -14,7 +14,7 @@ case class DeliveryRow(
   status: String
 )
 
-class Delivery(tag : Tag) extends Table[DeliveryRow](tag,"deliveries") with DateTimeMapping{
+class Delivery(tag : Tag) extends Table[DeliveryRow](tag,"deliveries") with DateTypeMapping{
   def deliveryId = column[Int]("deliveryId",O.PrimaryKey)
   def commandId = column[Int]("commandId")
   def deliveryDate = column[java.time.LocalDateTime]("deliveryDate")

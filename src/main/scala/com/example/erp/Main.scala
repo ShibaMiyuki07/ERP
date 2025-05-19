@@ -3,7 +3,7 @@ package com.example.erp
 import cats.effect.*
 import org.http4s.ember.server.*
 import org.http4s.implicits.*
-import com.example.controllers.{ArticleController, UserController}
+import com.example.controllers.UserController
 import com.comcast.ip4s.ipv4
 import com.example.services.UserService
 import slick.jdbc.JdbcBackend.Database
@@ -16,10 +16,6 @@ import scala.concurrent.ExecutionContext
 import com.comcast.ip4s.port 
 object Main extends IOApp:
 
-  val httpApp = ( 
-        ArticleController.routes
-      ).orNotFound
-      
   def run(args: List[String]): IO[ExitCode] =
   {
     val dbEc = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(4))
