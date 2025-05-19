@@ -5,10 +5,10 @@
 /project/target/config-classes
 *.cache
 *.jar
-/target
+target/
 /target/scala-3.3.3
-/target/streams
-/project
+/project/
 /target/streams/compile
 *.class
 *.tasty
+/.idea
