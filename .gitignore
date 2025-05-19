@@ -5,3 +5,7 @@
 /project/target/config-classes
 /project/target/config-classes
 *.cache
+*.jar
+/target
+/target/scala-3.3.3
+/target/streams
